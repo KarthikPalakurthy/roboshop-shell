@@ -12,3 +12,7 @@ cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.serv
 systemctl daemon-reload
 systemctl enable catalogue
 systemctl start catalogue
+
+yum install mongodb-org-shell -y
+mongo --host localhost </app/schema/catalogue.js
+
