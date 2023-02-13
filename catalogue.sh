@@ -10,9 +10,11 @@ mkdir /app
 
 curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
 
+# shellcheck disable=SC2164
 cd /app
 unzip /tmp/catalogue.zip
 
+# shellcheck disable=SC2164
 cd /app
 
 npm install
