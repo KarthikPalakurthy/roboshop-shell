@@ -13,6 +13,7 @@ systemctl daemon-reload
 systemctl enable catalogue
 systemctl start catalogue
 
+# We are installing the mongo client as it was already downloaded
 yum install mongodb-org-shell -y
 mongo --host localhost </app/schema/catalogue.js
 
