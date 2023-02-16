@@ -1,6 +1,6 @@
 source common.sh
 
-script_location=${pwd}
+script_location=$pwd
 
 print_head "Add Application User"
 id roboshop &>>${log}
