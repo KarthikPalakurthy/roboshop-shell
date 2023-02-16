@@ -10,8 +10,6 @@ if [ $? -eq 0 ]; then
   echo "Kindly refer the log file for more information, log - ${log}"
   exit 1
 fi
-
-
 }
 
 print_head() {
