@@ -1,6 +1,16 @@
+
+
 script_location=$(pwd)
 
+print_head " Installing Nginx "
 yum install nginx -y
+
+if [ $? -eq 0] then
+  echo " Success"
+  else
+  echo "fail"
+}
+
 rm -rf /usr/share/nginx/html/*
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
 # shellcheck disable=SC2164
