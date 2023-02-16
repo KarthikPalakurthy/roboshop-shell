@@ -1,3 +1,5 @@
+script_location=$(pwd)
+
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 yum install nodejs -y
 useradd roboshop
@@ -7,6 +9,8 @@ cd /app
 unzip /tmp/user.zip
 cd /app
 npm install
+
+cp "${script_location}"/files/user.service /etc/systemd/system/user.service
 systemctl daemon-reload
 systemctl enable user
 systemctl start user
