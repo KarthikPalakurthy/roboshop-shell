@@ -9,6 +9,7 @@ echo -e "\e[1;m Installing NodeJS\e[0"
 yum install nodejs -y &>>${log}
 
 echo -e "\e[1; Adding user\e[0"
+
 if [ $? -ne 0 ]; then
 useradd roboshop &>>${log}
 fi
@@ -21,14 +22,11 @@ status_check
 rm -rf /app/* &>>${log}
 status_check
 
-
 # shellcheck disable=SC2164
 cd /app
 unzip /tmp/user.zip
 status_check
 
-# shellcheck disable=SC2164
-cd /app
 npm install
 status_check
 
