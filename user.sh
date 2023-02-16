@@ -32,7 +32,7 @@ npm install
 status_check
 
 print_head "Configuring"
-cp ${script_location}/files/user.service /etc/systemd/system/user.service
+cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service
 status_check
 
 systemctl daemon-reload
@@ -47,5 +47,5 @@ status_check
 yum install mongodb-org-shell -y
 status_check
 
-mongo --host MONGODB-SERVER-IPADDRESS </app/schema/user.js
+mongo --host localhost </app/schema/user.js
 status_check
