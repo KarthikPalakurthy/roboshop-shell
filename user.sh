@@ -25,6 +25,8 @@ unzip /tmp/user.zip &>>${log}
 status_check
 
 print_head "Configuring user Service File"
+# shellcheck disable=SC1083
+# shellcheck disable=SC2164
   cp ${script_location}/files/user.service /etc/systemd/system/user.service &>>${log}
   status_check
 
