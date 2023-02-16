@@ -1,3 +1,4 @@
+source common.sh
 script_location=${pwd}
 
 echo -e "\e[1;m Downloading repo files\e[0"
