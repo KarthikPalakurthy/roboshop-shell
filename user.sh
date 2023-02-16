@@ -27,7 +27,8 @@ cd /app
 unzip /tmp/user.zip
 status_check
 
-cp {script_location}/files/user.service /etc/systemd/system/user.service
+# shellcheck disable=SC2164
+cd {script_location}/files/user.service /etc/systemd/system/user.service
 status_check
 
 npm install
