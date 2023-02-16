@@ -9,7 +9,7 @@ unzip /tmp/frontend.zip
 
 # shellcheck disable=SC1083
 # shellcheck disable=SC2164
-cp {script_location}/files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf
+cp ${script_location}/files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 systemctl enable nginx
 systemctl start nginx
