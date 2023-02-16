@@ -2,7 +2,7 @@ source common.sh
 
 script_location=$(pwd)
 
-print_head " Installing Nginx "
+print_head "Installing Nginx"
 yum install nginx -y
 {
 if [ $? -eq 0 ]; then
