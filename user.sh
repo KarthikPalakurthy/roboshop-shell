@@ -27,9 +27,11 @@ cd /app
 unzip /tmp/user.zip
 status_check
 
+print_script "NPM install"
 npm install
 status_check
 
+print_script "Configuring"
 cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${log}
 status_check
 
