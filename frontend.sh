@@ -3,7 +3,7 @@ source common.sh
 script_location=$(pwd)
 
 print_head "Installing Nginx"
-yum install nginx -y
+yum install nginx -y &>>${log}
 status_check
 
 print_head "Removing default files"
