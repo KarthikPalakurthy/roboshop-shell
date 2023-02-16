@@ -4,11 +4,12 @@ script_location=$(pwd)
 
 print_head " Installing Nginx "
 yum install nginx -y
-
-if [ $? -eq 0]; then
+{
+if [ $? -eq 0 ]; then
   echo "Success"
    else
   echo "fail"
+fi
 }
 
 rm -rf /usr/share/nginx/html/*
