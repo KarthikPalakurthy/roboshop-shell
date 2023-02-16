@@ -32,7 +32,7 @@ npm install
 status_check
 
 print_head "Configuring"
-cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service
+cp ${script_location}/files/user.service /etc/systemd/system/user.service
 status_check
 
 systemctl daemon-reload
