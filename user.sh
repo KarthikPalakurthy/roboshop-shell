@@ -2,102 +2,48 @@ source common.sh
 script_location=${pwd}
 
 echo -e "\e[1;m Downloading repo files\e[0"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-  exit
-fi
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>{log}
+status_check
 
 echo -e "\e[1;m Installing NodeJS\e[0"
-yum install nodejs -y
+yum install nodejs -y &>>{log}
 
 echo -e "\e[1; Adding user\e[0"
 if [ $? -ne 0 ]; then
-useradd roboshop
+useradd roboshop &>>{log}
 fi
 
 mkdir -p /app
 
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
+curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip &>>{log}
+status_check
 
-curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip
-
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
-
-rm -rf /app/*
-
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
+rm -rf /app/* &>>{log}
+status_check
 
 
 # shellcheck disable=SC2164
 cd /app
 unzip /tmp/user.zip
-
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
+status_check
 
 cp {script_location}/files/user.service /etc/systemd/system/user.service
-
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
+status_check
 
 npm install
-
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
+status_check
 
 systemctl daemon-reload
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
+status_check
+
 systemctl enable user
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
+status_check
+
 systemctl start user
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
+status_check
+
 yum install mongodb-org-shell -y
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
+status_check
+
 mongo --host MONGODB-SERVER-IPADDRESS </app/schema/user.js
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-  exit
-fi
+status_check
