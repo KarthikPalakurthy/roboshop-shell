@@ -24,7 +24,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[1;31m Fail\e[0"
 fi
 
-mkdir /app
+mkdir -p /app
 
 if [ $? -eq 0 ]; then
   echo -e "\e[1;32m Successful\e[0"
@@ -39,6 +39,8 @@ if [ $? -eq 0 ]; then
   else
   echo -e "\e[1;31m Fail\e[0"
 fi
+
+rm -rf /app/*
 
 cd /app
 unzip /tmp/user.zip
