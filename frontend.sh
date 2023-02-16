@@ -1,34 +1,12 @@
-source common.sh
+script_location=${pwd}
 
-print_head "Install Nginx"
-yum install nginx -y &>>${log}
-status_check
+yum install nginx -y
+rm -rf /usr/share/nginx/html/*
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+cd /usr/share/nginx/html
+unzip /tmp/frontend.zip
 
-print_head " Remove Nginx Old Content "
-rm -rf /usr/share/nginx/html/* &>>${log}
-status_check
+cd {script_location}/files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf
 
-
-print_head "Download Frontend Content"
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${log}
-status_check
-
-cd /usr/share/nginx/html &>>${log}
-
-print_head "Extract Frontend Content"
-unzip /tmp/frontend.zip &>>${log}
-status_check
-
-print_head "Copy RoboShop Nginx Config File"
-# shellcheck disable=SC2086
-cp ${script_location}/files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${log}
-status_check
-
-print_head "Enable Nginx"
-systemctl enable nginx &>>${log}
-status_check
-
-print_head "Start Nginx"
-systemctl restart nginx &>>${log}
-status_check
-
+systemctl enable nginx
+systemctl start nginx
