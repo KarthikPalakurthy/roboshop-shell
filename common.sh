@@ -19,24 +19,24 @@ print_head() {
 APP_PREREQ() {
 
   print_head "Add Application User"
-  id roboshop &>>${LOG}
+  id roboshop &>>${log}
   if [ $? -ne 0 ]; then
-    useradd roboshop &>>${LOG}
+    useradd roboshop &>>${log}
   fi
   status_check
 
-  mkdir -p /app &>>${LOG}
+  mkdir -p /app &>>${log}
 
   print_head "Downloading App content"
-  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
   status_check
 
   print_head "Cleanup Old Content"
-  rm -rf /app/* &>>${LOG}
+  rm -rf /app/* &>>${log}
   status_check
 
   print_head "Extracting App Content"
   cd /app
-  unzip /tmp/${component}.zip &>>${LOG}
+  unzip /tmp/${component}.zip &>>${log}
   status_check
 }
