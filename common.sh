@@ -1,4 +1,4 @@
-script_location=${pwd}
+script_location=$(pwd)
 
 log=/tmp/roboshop.log
 
@@ -8,7 +8,6 @@ if [ $? -eq 0 ]; then
    else
   echo -e "\e[1;31m Failure\e[0m"
   echo "Kindly refer the log file for more information, log - ${log}"
-  exit 1
 fi
 }
 
