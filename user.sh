@@ -1,3 +1,5 @@
+source common.sh
+
 script_location=$(pwd)
 
 print_head "Downloading configuration files"
