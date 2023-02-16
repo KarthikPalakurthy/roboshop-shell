@@ -1,35 +1,33 @@
 source common.sh
 
-script_location=$(pwd) # We are trying to determine the current location using the pwd command
-log=/tmp/roboshop.log #Assigning the log file to direct all the logs.
-
-echo -e "\e[32m Installing Nginx \e[0m"
+print_head "Install Nginx"
 yum install nginx -y &>>${log}
 status_check
 
-echo -e "\e[32m Removing default files \e[0m"
+print_head "Remove Nginx Old Content"
 rm -rf /usr/share/nginx/html/* &>>${log}
 status_check
 
-echo -e "\e[32m Downloading frontend content \e[0m"
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip | bash &>>${log}
+
+print_head "Download Frontend Content"
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${log}
 status_check
 
-# shellcheck disable=SC2164
-cd /usr/share/nginx/html | bash &>>${log}
+cd /usr/share/nginx/html &>>${log}
 
-echo -e "\e[32m Extracting the frontend content \e[0m"
+print_head "Extract Frontend Content"
 unzip /tmp/frontend.zip &>>${log}
 status_check
 
-echo -e "\e[32m Copying the conf file to the default location \e[0m"
-cp ${script_location}/files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${log} # As we need to copy the files from current location to the prescribed location, we are declaring the pwd command.
+print_head "Copy RoboShop Nginx Config File"
+cp ${script_location}/files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${log}
 status_check
 
-echo -e "\e[32m Enabling Nginx \e[0m"
-systemctl enable nginx | bash &>>${log}
+print_head "Enable Nginx"
+systemctl enable nginx &>>${log}
 status_check
 
-echo -e "\e[32m Starting Nginx \e[0m"
-systemctl restart nginx | bash &>>${log}
+print_head "Start Nginx"
+systemctl restart nginx &>>${log}
 status_check
+
