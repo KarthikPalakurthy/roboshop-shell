@@ -18,12 +18,6 @@ if [ $? -ne 0 ]; then
 useradd roboshop
 fi
 
-if [ $? -eq 0 ]; then
-  echo -e "\e[1;32m Successful\e[0"
-  else
-  echo -e "\e[1;31m Fail\e[0"
-fi
-
 mkdir -p /app
 
 if [ $? -eq 0 ]; then
@@ -42,6 +36,14 @@ fi
 
 rm -rf /app/*
 
+if [ $? -eq 0 ]; then
+  echo -e "\e[1;32m Successful\e[0"
+  else
+  echo -e "\e[1;31m Fail\e[0"
+fi
+
+
+# shellcheck disable=SC2164
 cd /app
 unzip /tmp/user.zip
 
