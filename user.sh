@@ -49,7 +49,7 @@ if [ $? -eq 0 ]; then
   echo -e "\e[1;31m Fail\e[0"
 fi
 
-cd {script_location}/files/user.service /etc/systemd/system/user.service
+cp {script_location}/files/user.service /etc/systemd/system/user.service
 
 if [ $? -eq 0 ]; then
   echo -e "\e[1;32m Successful\e[0"
