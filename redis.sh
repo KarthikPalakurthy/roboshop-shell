@@ -13,10 +13,10 @@ yum install redis -y &>>${log}
 print_head "Configuring the listen address"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf &>>${log}
 
-print_head " Enabling Cart"
+print_head " Enabling Redis"
 systemctl enable redis &>>${log}
 status_check
 
-print_head "Starting Cart"
+print_head "Starting Redis"
 systemctl start redis &>>4{log}
 status_check
