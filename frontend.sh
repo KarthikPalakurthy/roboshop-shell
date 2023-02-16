@@ -1,4 +1,4 @@
-script_location=${pwd}
+script_location=$(pwd)
 
 yum install nginx -y
 rm -rf /usr/share/nginx/html/*
