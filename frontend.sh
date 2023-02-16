@@ -20,6 +20,7 @@ unzip /tmp/frontend.zip &>>${log}
 status_check
 
 print_head "Copy RoboShop Nginx Config File"
+# shellcheck disable=SC2086
 cp ${script_location}/files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>>${log}
 status_check
 
