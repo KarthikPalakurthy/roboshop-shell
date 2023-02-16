@@ -27,12 +27,12 @@ cd /app
 unzip /tmp/user.zip
 status_check
 
-print_script "NPM install"
+print_head "NPM install"
 npm install
 status_check
 
-print_script "Configuring"
-cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${log}
+print_head "Configuring"
+cp ${script_location}/files/catalogue.service /etc/systemd/system/catalogue.service
 status_check
 
 systemctl daemon-reload
