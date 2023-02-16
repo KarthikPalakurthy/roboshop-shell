@@ -28,11 +28,15 @@ unzip /tmp/user.zip
 status_check
 
 # shellcheck disable=SC2164
+cd /app
+npm install
+status_check
+
+# shellcheck disable=SC2164
 cp {script_location}/files/user.service /etc/systemd/system/user.service
 status_check
 
-npm install
-status_check
+
 
 systemctl daemon-reload
 status_check
