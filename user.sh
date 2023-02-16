@@ -9,7 +9,6 @@ status_check
 yum install nodejs -y
 status_check
 
-id useradd
 if [ $? -ne 0 ]; then
 useradd roboshop
 fi
