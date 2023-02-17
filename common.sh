@@ -67,7 +67,7 @@ NODEJS() {
 SCHEMA() {
 
 print_head "Configuring {component} service file"
-cp ${script_location}/files/{component}.service /etc/systemd/system/{component}.service &>>${log}
+cp ${script_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${log}
 status_check
 
 print_head "Reloading SystemD"
@@ -88,7 +88,7 @@ systemctl start {component} &>>${log}
 status_check
 
 print_head "Loading Schema"
-mongo --host localhost </app/schema/{component}.js &>>${log}
+mongo --host localhost </app/schema/${component}.js &>>${log}
 status_check
 
 }
