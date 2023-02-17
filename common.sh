@@ -67,11 +67,7 @@ NODEJS() {
 SCHEMA() {
 
 print_head "Configuring ${component} service file"
-cp ${script_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${log}
-status_check
-
-print_head "Reloading SystemD"
-systemctl daemon-reload &>>${log}
+cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
 status_check
 
 print_head "Installing MongoDB client "
