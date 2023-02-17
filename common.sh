@@ -16,7 +16,8 @@ print_head() {
   echo -e "\e[1;m $1 \e[0m"
 }
 
-NODEJS() {
+NODEJS()
+{
 
   print_head "Add Application User"
   id roboshop &>>${log}
@@ -65,8 +66,8 @@ NODEJS() {
   systemctl start {component} &>>${log}
   status_check
 
-if [ schema_load == "true" ]; then
-  {
+  if [ schema_load == "true" ]; then
+    {
   print_head "Configuring NodeJS Repos"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}
   status_check
@@ -83,9 +84,7 @@ if [ schema_load == "true" ]; then
   print_head "Loading Schema"
   mongo --host localhost </app/schema/${component}.js &>>${log}
   status_check
-  }
-
-
+    }
 }
 
 
