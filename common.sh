@@ -56,7 +56,6 @@ NODEJS() {
 
   # shellcheck disable=SC2164
   cd /app
-  status_check
 
   print_head "Installing NodeJS dependencies"
   npm install &>>${log}
