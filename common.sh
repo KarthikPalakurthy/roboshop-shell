@@ -65,7 +65,7 @@ NODEJS() {
   systemctl start ${component} &>>${log}
   status_check
 
-  if [ schema_load == "true" ]; then {
+  if [ schema_load == "true" ]; then
   print_head "Configuring NodeJS Repos"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}
   status_check
@@ -83,8 +83,6 @@ NODEJS() {
   mongo --host localhost </app/schema/${component}.js &>>${log}
   status_check
   fi
-    }
-fi
 }
 
 
