@@ -16,7 +16,7 @@ print_head() {
   echo -e "\e[1;m $1 \e[0m"
 }
 
-APP_PREREQ() {
+NODEJS() {
 
   print_head "Add Application User"
   id roboshop &>>${log}
@@ -41,19 +41,6 @@ APP_PREREQ() {
   cd /app
   unzip /tmp/${component}.zip &>>${log}
   status_check
-}
-
-NODEJS() {
-
-  print_head "Configuring NodeJS Repos"
-  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}
-  status_check
-
-  print_head "Install NodeJS"
-  yum install nodejs -y &>>${log}
-  status_check
-
-  APP_PREREQ
 
   # shellcheck disable=SC2164
   cd /app
@@ -62,29 +49,43 @@ NODEJS() {
   npm install &>>${log}
   status_check
 
+  print_head "Configuring ${component} service file"
+  cp ${script_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${log}
+  status_check
+
+  print_head " Restarting SystemD"
+  systemctl daemon-reload
+  status_check
+
+  print_head "Enabling {component}"
+  systemctl enable {component} &>>${log}
+  status_check
+
+  print_head "Starting {component}"
+  systemctl start {component} &>>${log}
+  status_check
+
+if [ schema_load == "true" ]; then
+  {
+  print_head "Configuring NodeJS Repos"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log}
+  status_check
+
+  print_head "Configuring Mongo repo file"
+  cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
+  status_check
+
+  print_head "Installing MongoDB client "
+  # We are installing the mongo client as it was already downloaded
+  yum install mongodb-org-shell -y &>>${log}
+  status_check
+
+  print_head "Loading Schema"
+  mongo --host localhost </app/schema/${component}.js &>>${log}
+  status_check
+  }
+
+
 }
 
-SCHEMA() {
 
-print_head "Configuring ${component} service file"
-cp ${script_location}/files/mongodb.repo /etc/yum.repos.d/mongodb.repo &>>${log}
-status_check
-
-print_head "Installing MongoDB client "
-# We are installing the mongo client as it was already downloaded
-yum install mongodb-org-shell -y &>>${log}
-status_check
-
-print_head "Enabling {component}"
-systemctl enable {component} &>>${log}
-status_check
-
-print_head "Starting {component}"
-systemctl start {component} &>>${log}
-status_check
-
-print_head "Loading Schema"
-mongo --host localhost </app/schema/${component}.js &>>${log}
-status_check
-
-}
