@@ -28,6 +28,7 @@ APP_PREREQ() {
   mkdir -p /app &>>${log}
 
   print_head "Downloading App content"
+  # shellcheck disable=SC2154
   curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
   status_check
 

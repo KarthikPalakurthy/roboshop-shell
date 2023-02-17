@@ -1,14 +1,8 @@
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+source common.sh
 
-yum install nodejs -y
-useradd roboshop
-mkdir /app
-curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart.zip
-cd /app
-unzip /tmp/cart.zip
-cd /app
-npm install
-cd {script_location}/files/cart.service /etc/systemd/system/cart.service
-systemctl daemon-reload
-systemctl enable cart
-systemctl start cart
+# shellcheck disable=SC2034
+component=cart
+
+NODEJS
+
+SCHEMA
