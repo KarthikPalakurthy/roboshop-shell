@@ -66,7 +66,7 @@ NODEJS() {
 
 SCHEMA() {
 
-print_head "Configuring {component} service file"
+print_head "Configuring ${component} service file"
 cp ${script_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${log}
 status_check
 
