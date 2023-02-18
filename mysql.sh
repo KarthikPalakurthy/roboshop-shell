@@ -10,6 +10,6 @@ mysql -uroot -pRoboShop@1
 
 yum install mysql-community-server -y
 
-systemctl enable mysqld
+systemctl enable mysql
 
-systemctl start mysqld
+systemctl start mysql
