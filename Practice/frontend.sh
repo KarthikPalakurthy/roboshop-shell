@@ -1,5 +1,5 @@
 source commoncode.sh
-yum install nginx -y >>${log}
+yum install nginx -y
 status_check
 rm -rf /usr/share/nginx/html/*
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
