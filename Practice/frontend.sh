@@ -1,6 +1,6 @@
 source commoncode.sh
 
-echo -e "\e[1; Installing Nginx\e[0m"
+echo -e "\e[1;m Installing Nginx\e[0m"
 
 yum install nginx -y
 
