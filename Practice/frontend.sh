@@ -4,7 +4,7 @@ log=/tmp/roboshop.log
 
 echo -e "\e[1;m Installing Nginx\e[0m"
 
-yum install nginx -y
+yum install nginx -y >>${log}
 
 status_check
 rm -rf /usr/share/nginx/html/*
