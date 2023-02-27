@@ -19,11 +19,11 @@ status_check
 # shellcheck disable=SC2164
 cd /usr/share/nginx/html
 
-echo -e "\e[1; Extracting frontend content\e[0m"
+echo -e "\e[1;m Extracting frontend content\e[0m"
 unzip /tmp/frontend.zip
 status_check
 
-echo -e "\e[1; Extracting frontend content\e[0m"
+echo -e "\e[1;m Extracting frontend content\e[0m"
 cp ${script_location} /etc/nginx/default.d/roboshop.conf
 systemctl enable nginx
 systemctl restart nginx
