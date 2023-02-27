@@ -23,7 +23,9 @@ echo -e "\e[1;m Extracting frontend content\e[0m"
 unzip /tmp/frontend.zip
 status_check
 
+cd /app
+
 echo -e "\e[1;m Extracting frontend content\e[0m"
-cp ${script_location} /etc/nginx/default.d/roboshop.conf
+cp ${script_location}/practicefiles/roboshop.conf /etc/nginx/default.d/roboshop.conf
 systemctl enable nginx
 systemctl restart nginx
